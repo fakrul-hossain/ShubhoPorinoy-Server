@@ -1,29 +1,39 @@
-
-
-
-
-# Study Sphere: A Study Sphere Application  
+# Shubho Porinoy: A Matrimony Platform  
 
 ## Live Site URL  
-[Visit Study Sphere](https://study-sphere-fakrul.netlify.app/)  
+[Visit Shubho Porinoy](#)  
 
 ## About  
-Study Sphere is a dynamic and secure Study Sphere platform designed to connect creators, entrepreneurs, and individuals with a supportive community. Whether you're raising funds for personal needs, startups, or creative projects, Study Sphere  makes it easy to share your campaign and receive contributions.  
+Shubho Porinoy is a feature-rich and secure Matrimony platform that connects individuals in search of life partners. Designed with simplicity, efficiency, and user privacy in mind, Shubho Porinoy offers a seamless experience for both users and administrators to manage profiles, find matches, and explore success stories.  
 
 ## Features  
-- **User-Friendly Interface:** A sleek, responsive design ensuring a seamless experience on mobile, tablet, and desktop devices.  
-- **Secure Authentication:** Login and register with email/password and OAuth (Google or GitHub) for secure access.  
-- **Dynamic Campaign Management:** Create, update, and manage your campaigns with a user-specific dashboard.  
-- **Donation Tracking:** Users can view their contributions and stay updated on campaign progress.  
-- **Advanced Sorting and Filtering:** Easily sort and filter campaigns by minimum donation amount and deadlines.  
-- **Dark/Light Theme Toggle:** Choose between dark and light mode for a personalized user experience.  
-- **Real-Time Feedback:** Toast notifications and alerts for actions like login, registration, and campaign updates.  
+- **User-Friendly Interface:** A sleek and responsive design for all devices (mobile, tablet, and desktop).  
+- **Secure Authentication:** Login, registration with email/password, and Google Sign-in integration.  
+- **Comprehensive Biodata Management:** Create, view, and update detailed biodata profiles with advanced filters for age, division, and biodata type.  
+- **Private Contact Details:** Secure sensitive details (email and phone number) for non-premium members.  
+- **Premium Membership:** Premium profiles are highlighted for better visibility.  
+- **Favorite and Contact Requests:** Users can save profiles to favorites and request contact information with a payment system.  
+- **Success Stories:** Users can share their success stories, which admins can approve and display.  
+- **Admin Dashboard:** Manage users, approve premium and contact requests, and access insightful platform statistics.  
+- **Secure and Scalable:** JWT authentication, environment variables, and paginated data fetching for performance.  
+- **Real-Time Feedback:** SweetAlert and toast notifications for CRUD operations and user actions.  
+
+## Technologies Used  
+- **Backend Framework:** Node.js with Express.js  
+- **Database:** MongoDB  
+- **Authentication:** JWT (JSON Web Token)  
+- **Payment Integration:** (e.g., Stripe or other)  
+- **Libraries:**  
+  - Cors  
+  - Cookie-parser  
+  - Dotenv  
+  - Tanstack Query (Client Side for Data Fetching)  
+
+## Prerequisites  
+- Node.js installed on your system  
+- MongoDB Atlas or local MongoDB instance configured  
 
 ## How to Get Started  
-1. Clone the repository.  
+1. Clone the repository:  
    ```bash
-   git clone https://github.com/programming-hero-web-course2/b10-a10-server-side-fakrul-hossain
-# b10a11-client-side-fakrul-hossain
-"# b10a11-client-side-fakrul-hossain" 
-"# b10a11-client-side-fakrul-hossain" 
-"# b10a12-server-side-fakrul-hossain" 
+   git clone https://github.com/your-username/shubho-porinoy-server
