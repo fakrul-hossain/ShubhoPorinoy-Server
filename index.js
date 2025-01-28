@@ -10,7 +10,7 @@ const port = process.env.PORT || 5000;
 const app = express();
 
 const corsOptions = {
-  origin: ["http://localhost:5173", ""],
+  origin: ["http://localhost:5173", "https://shuboporinoy.netlify.app"],
   credentials: true,
   optionalSuccessStatus: 200,
 };
@@ -36,7 +36,7 @@ const client = new MongoClient(uri, {
 const verifyToken = (req, res, next) => {
   const token = req.cookies?.token;
   if (!token) return res.status(401).send({ message: "unauthorized access" });
-  jwt.verify(token, 'fakrul', (err, decoded) => {
+  jwt.verify(token, 'fakrulhossain', (err, decoded) => {
     if (err) {
       return res.status(401).send({ message: "unauthorized access" });
     }
@@ -58,7 +58,7 @@ async function run() {
       try {
         const email = req.body;
         const token = jwt.sign(email, 'fakrul');
-        console.log(email, token);
+        // console.log(email, token);
         res
           .cookie("token", token, {
             httpOnly: true,
@@ -82,25 +82,56 @@ async function run() {
         .send({ success: true });
     });
 
-
+// Check user Data
+app.get("/users/role/:email", verifyToken, async (req, res) => {
+  try {
+    const email = req.params.email;
+    const query = { email };
+    const result = await usersCollection.findOne(query);
+    res.send(result);
+  } catch (error) {
+    res.send(error.message);
+  }
+});
+// Verify Admin
+const verifyAdmin = async (req, res, next) => {
+  const email = req.user?.email;
+  const query = { email: email };
+  const user = await usersCollection.findOne(query);
+  const isAdmin = user?.role === "Admin";
+  if (!isAdmin) {
+    return res.status(403).send({ message: "forbidden access" });
+  }
+  next();
+};
 
 
     // User Registration Route
     app.post("/register", async (req, res) => {
-      const { name, email, password, photoURL } = req.body;
-      const existingUser = await usersCollection.findOne({ email });
-      if (existingUser) return res.status(400).send({ message: "User already exists" });
-      
-      const newUser = {
-        name,
-        email,
-        password, // You should hash this password using bcrypt
-        photoURL,
-      };
+      try {
+        const email = req.params.email;
+        const query = { email };
+        const user = req.body;
 
-      const result = await usersCollection.insertOne(newUser);
-      res.send({ message: "User registered successfully" });
-    });
+        const isExist = await usersCollection.findOne(query);
+        if (isExist) {
+          return;
+          // res.send("Already Registered");
+        }
+
+        const result = await usersCollection.insertOne({
+          ...user,
+          role: "Customer",
+          timestamp: Date.now(),
+        });
+
+        res.send(result);
+        console.log(result)
+      } catch (error) {
+        console.error("Error:", error);
+        res.status(500).send({ message: "Internal Server Error" });
+      }
+    });
 
     // User Login Route
     app.post("/login", async (req, res) => {
@@ -122,9 +153,37 @@ async function run() {
 
     // Get Biodata route (Fetch all biodatas, include pagination if necessary)
     app.get("/biodatas", async (req, res) => {
-      const biodatas = await biodatasCollection.find().toArray();
-      res.send(biodatas);
-    });
+      try {
+          const { minAge, maxAge, type, division } = req.query;
+  
+          // Start with an empty query object
+          let query = {};
+  
+          // Ensure age filtering works correctly
+          if (minAge && maxAge) {
+              query.age = { $gte: parseInt(minAge), $lte: parseInt(maxAge) };
+          }
+  
+          // Filter by biodata type (Male/Female)
+          if (type) {
+              query.biodataType = type;
+          }
+  
+          // Filter by division (location)
+          if (division) {
+              query.division = division;
+          }
+  
+          console.log("Final Query:", query); // Debugging: Check the query object
+  
+          const biodatas = await biodatasCollection.find(query).toArray();
+          res.send(biodatas);
+      } catch (error) {
+          console.error("Error fetching biodatas:", error);
+          res.status(500).send({ message: "Failed to fetch biodatas" });
+      }
+  });
+  
 
     // Create Biodata route
     app.post("/biodata", verifyToken, async (req, res) => {
