@@ -1,7 +1,7 @@
 # Shubho Porinoy: A Matrimony Platform  
 
 ## Live Site URL  
-[Visit Shubho Porinoy](#)  
+[https://shuboporinoy.netlify.app/](#)  
 
 ## About  
 Shubho Porinoy is a feature-rich and secure Matrimony platform that connects individuals in search of life partners. Designed with simplicity, efficiency, and user privacy in mind, Shubho Porinoy offers a seamless experience for both users and administrators to manage profiles, find matches, and explore success stories.  
@@ -36,5 +36,5 @@ Shubho Porinoy is a feature-rich and secure Matrimony platform that connects ind
 ## How to Get Started  
 1. Clone the repository:  
    ```bash
-   git clone https://github.com/your-username/shubho-porinoy-server
+   git clone https://github.com/fakrul-hossain/ShubhoPorinoy-Server
 "# ShubhoPorinoy-Server" 
